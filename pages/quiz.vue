@@ -13,7 +13,7 @@ export default {
         const validateData = getValidate.data()
         if (validateData) {
           if (validateData.scanned_user.includes(store.state.user.uid)) {
-            console.log('already scanned')
+            // console.log('already scanned')
             return false
           } else {
             validate.update({
@@ -22,7 +22,7 @@ export default {
                 store.state.user.uid,
               ],
             })
-            console.log('first time scan')
+            // console.log('first time scan')
             return true
           }
         }
