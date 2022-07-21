@@ -22,18 +22,7 @@
       </div>
       <div
         v-if="errorText !== ''"
-        class="
-          w-full
-          h-14
-          px-5
-          bg-red-600
-          flex
-          items-center
-          font-medium
-          text-white
-          rounded-md
-          mb-6
-        "
+        class="w-full h-14 px-5 bg-red-600 flex items-center font-medium text-white rounded-md mb-6"
       >
         {{ errorText }}
       </div>
@@ -89,5 +78,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>
