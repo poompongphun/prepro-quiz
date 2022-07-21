@@ -63,6 +63,22 @@ export default {
     },
   },
 
+  tailwindcss: {
+    // Options
+    theme: {
+      extend: {},
+      container: {
+        padding: {
+          DEFAULT: '100rem',
+          sm: '2rem',
+          lg: '100rem',
+          xl: '100rem',
+          '2xl': '100rem',
+        },
+      },
+    },
+  },
+
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
@@ -71,6 +87,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
+
   router: {
     base: '/prepro-quiz/',
   },
