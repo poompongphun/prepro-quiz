@@ -4,6 +4,7 @@ export const state = () => ({
   itemsState: [],
   user: null,
   quiz: [],
+  users: [],
 })
 export const mutations = {
   ...vuexfireMutations,
@@ -50,6 +51,13 @@ export const actions = {
   }),
   unbindUserDocument: firestoreAction(function ({ unbindFirestoreRef }) {
     unbindFirestoreRef('user', false)
+  }),
+  bindUsersDocument: firestoreAction(async function ({ bindFirestoreRef }) {
+    const ref = this.$fire.firestore.collection('users')
+    await bindFirestoreRef('users', ref, { wait: true })
+  }),
+  unbindUsersDocument: firestoreAction(function ({ unbindFirestoreRef }) {
+    unbindFirestoreRef('users', false)
   }),
 }
 export const getters = {

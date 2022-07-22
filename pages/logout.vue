@@ -7,8 +7,14 @@ export default {
   name: 'LogoutPage',
   async mounted() {
     try {
+      await this.$fire.firestore
+        .collection('users')
+        .doc(this.$fire.auth.currentUser.uid)
+        .update({
+          is_login: false,
+        })
       await this.$fire.auth.signOut()
-      this.$router.push('/login')
+      window.location = '/login'
     } catch (e) {
       console.error(e)
     }
