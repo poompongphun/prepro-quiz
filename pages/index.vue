@@ -15,7 +15,7 @@
               :key="index"
               class="w-10 h-10 flex items-center justify-center text-white rounded-xl bg-green-500"
             >
-              {{ index + 1 }}
+              {{ getQuizById(item.id).no }}
             </div>
             <div v-if="!$store.state.user.correct_aws.length > 0">- None</div>
           </div>
@@ -28,7 +28,7 @@
               :key="index"
               class="w-10 h-10 flex items-center justify-center text-white rounded-xl bg-red-500"
             >
-              {{ index + 1 }}
+              {{ getQuizById(item.id).no }}
             </div>
             <div v-if="!$store.state.user.wrong_aws.length > 0">- None</div>
           </div>
