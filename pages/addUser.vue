@@ -1,7 +1,7 @@
 <template>
   <div>
-    <input type="text" v-model="username" />
-    <input type="text" v-model="password" />
+    <input v-model="username" type="text" />
+    <input v-model="password" type="text" />
     <button @click="submit">submit</button>
   </div>
 </template>
@@ -16,23 +16,22 @@ export default {
     }
   },
   methods: {
-    submit() {
-      this.$fire.auth.createUserWithEmailAndPassword(
+    async submit() {
+      const user = await this.$fire.auth.createUserWithEmailAndPassword(
         this.username + '@it.kmitl.ac.th',
         this.password
       )
-      this.$fire.firestore
-        .collection('users')
-        .add({
-          name: this.username,
-          correct_aws: [],
-          wrong_aws: [],
-          score: 0,
-          is_login: false,
-        })
-        .then(() => {
-          this.username = ''
-        })
+      console.log(user)
+      await this.$fire.firestore.collection('users').doc(user.user.uid).set({
+        name: this.username,
+        correct_aws: [],
+        wrong_aws: [],
+        score: 0,
+        is_login: false,
+      })
+
+      this.username = ''
+      this.password = ''
     },
   },
 }
