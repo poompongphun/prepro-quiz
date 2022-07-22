@@ -17,7 +17,7 @@
         </div>
       </div>
       <img
-        :src="`https://api.qrserver.com/v1/create-qr-code/?size=720x720&data=${url}?id=${quiz.id}`"
+        :src="`https://api.qrserver.com/v1/create-qr-code/?size=720x720&data=${url}quiz?id=${quiz.id}`"
         width="150"
       />
     </div>
