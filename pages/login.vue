@@ -22,24 +22,22 @@
       </div>
       <div
         v-if="errorText !== ''"
-        class="w-full h-14 px-5 bg-red-600 flex items-center font-medium text-white rounded-md mb-6"
+        class="
+          w-full
+          h-14
+          px-5
+          bg-red-600
+          flex
+          items-center
+          font-medium
+          text-white
+          rounded-md
+          mb-6
+        "
       >
         {{ errorText }}
       </div>
-      <button
-        class="w-full"
-        style="
-          width: 100%;
-          max-width: 132px;
-          background-color: #3ac10a;
-          color: white;
-          height: 44px;
-          border-radius: 0.375rem;
-        "
-        @click="login"
-      >
-        Login
-      </button>
+      <button class="w-full greenBtn" @click="login">Login</button>
     </div>
   </div>
 </template>
@@ -78,4 +76,5 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+</style>

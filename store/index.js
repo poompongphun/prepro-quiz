@@ -3,6 +3,7 @@ import { vuexfireMutations, firestoreAction } from 'vuexfire'
 export const state = () => ({
   itemsState: [],
   user: null,
+  quiz: [],
 })
 export const mutations = {
   ...vuexfireMutations,
@@ -21,12 +22,12 @@ export const mutations = {
 }
 
 export const actions = {
-  bindCountDocument: firestoreAction(async function ({ bindFirestoreRef }) {
-    const ref = this.$fire.firestore.collection('items')
-    await bindFirestoreRef('itemsState', ref, { wait: true })
+  bindQuizDocument: firestoreAction(async function ({ bindFirestoreRef }) {
+    const ref = this.$fire.firestore.collection('quiz')
+    await bindFirestoreRef('quiz', ref, { wait: true })
   }),
-  unbindCountDocument: firestoreAction(function ({ unbindFirestoreRef }) {
-    unbindFirestoreRef('itemsState', false)
+  unbindQuizDocument: firestoreAction(function ({ unbindFirestoreRef }) {
+    unbindFirestoreRef('quiz', false)
   }),
   onAuthStateChangedAction: (ctx, { authUser, claims }) => {
     if (!authUser) {
@@ -40,7 +41,7 @@ export const actions = {
   },
 }
 export const getters = {
-  count(state) {
-    return state.itemsState
+  getQuizById: (state) => (id) => {
+    return state.quiz.find((quiz) => quiz.id === id)
   },
 }

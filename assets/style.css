@@ -1,0 +1,8 @@
+.greenBtn {
+  width: 100%;
+  max-width: 132px;
+  background-color: #3ac10a;
+  color: white;
+  height: 44px;
+  border-radius: 0.375rem;
+}
