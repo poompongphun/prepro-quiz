@@ -13,16 +13,7 @@
             <div
               v-for="(item, index) in $store.state.user.correct_aws"
               :key="index"
-              class="
-                w-10
-                h-10
-                flex
-                items-center
-                justify-center
-                text-white
-                rounded-xl
-                bg-green-500
-              "
+              class="w-10 h-10 flex items-center justify-center text-white rounded-xl bg-green-500"
             >
               {{ index + 1 }}
             </div>
@@ -35,16 +26,7 @@
             <div
               v-for="(item, index) in $store.state.user.wrong_aws"
               :key="index"
-              class="
-                w-10
-                h-10
-                flex
-                items-center
-                justify-center
-                text-white
-                rounded-xl
-                bg-red-500
-              "
+              class="w-10 h-10 flex items-center justify-center text-white rounded-xl bg-red-500"
             >
               {{ index + 1 }}
             </div>
@@ -57,16 +39,7 @@
             <div
               v-for="(item, index) in $store.getters.awsLeft"
               :key="index"
-              class="
-                w-10
-                h-10
-                flex
-                items-center
-                justify-center
-                text-white
-                rounded-xl
-                bg-gray-300
-              "
+              class="w-10 h-10 flex items-center justify-center text-white rounded-xl bg-gray-300"
             >
               {{ getQuizById(item.id).no }}
             </div>

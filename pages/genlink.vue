@@ -2,9 +2,9 @@
   <div>
     <!-- {{ window.location }} -->
     <div
-      class="card relative mx-auto my-4"
       v-for="(quiz, i) in $store.state.quiz"
       :key="i"
+      class="card relative mx-auto my-4"
     >
       <div class="">
         <div>{{ quiz.no }}. Link to Quiz:</div>

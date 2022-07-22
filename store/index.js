@@ -57,7 +57,9 @@ export const getters = {
     return state.quiz.find((quiz) => quiz.id === id)
   },
   awsLeft: (state) => {
-    console.log('hi');
-    return state.quiz.filter((quiz) => !quiz.submited_user.includes(state.user.id) )
-  }
+    console.log('hi')
+    return state.quiz.filter(
+      (quiz) => !quiz.submited_user.includes(state.user.id)
+    )
+  },
 }
