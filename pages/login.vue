@@ -36,8 +36,8 @@ import NavBar from '~/components/NavBar.vue'
 export default {
   name: 'LoginPage',
   components: { NavBar },
-  validate({ params, query, store }) {
-    return !store.state.user
+  validate({ params, query, store, $fire }) {
+    return !$fire.auth.currentUser
   },
   data: () => ({
     username: 'blackslash',

@@ -14,7 +14,7 @@ export default {
           is_login: false,
         })
       await this.$fire.auth.signOut()
-      window.location = '/login'
+      window.location.href = '/login'
     } catch (e) {
       console.error(e)
     }
