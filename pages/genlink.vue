@@ -27,7 +27,7 @@
 export default {
   name: 'LinkGen',
   data: () => ({
-    url: 'http://pongphun.com/prepro-quiz',
+    url: 'https://pongphun.com/prepro-quiz',
   }),
 }
 </script>
