@@ -1,17 +1,7 @@
 <template>
   <div
     v-if="dialog"
-    class="
-      w-screen
-      h-screen
-      fixed
-      top-0
-      left-0
-      flex
-      justify-center
-      items-center
-      transition-opacity
-    "
+    class="w-screen h-screen fixed top-0 left-0 flex justify-center items-center transition-opacity"
     :class="{ fadeIn: dialog }"
     style="background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(3px)"
   >
@@ -53,5 +43,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

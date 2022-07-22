@@ -9,7 +9,7 @@
       @yes="choiceClick(choice)"
       @no="dialog = false"
     />
-    {{this.$store.state.user.uid}}
+    {{ $store.state.user.uid }}
   </div>
 </template>
 
@@ -42,14 +42,16 @@ export default {
         .doc(this.$store.state.user.uid)
       const meGet = await me.get()
       const meData = await meGet.data()
-      console.log("medata", meGet);
+      console.log('medata', meGet)
       if (choice.status) {
         await me.update({
           correct_aws: [
             ...meData.correct_aws,
             this.$store.getters.getQuizById(this.$route.query.id).id,
           ],
-          score: meData.score + this.$store.getters.getQuizById(this.$route.query.id).point
+          score:
+            meData.score +
+            this.$store.getters.getQuizById(this.$route.query.id).point,
         })
         this.$router.push('/')
       } else {
@@ -58,7 +60,9 @@ export default {
             ...meData.wrong_aws,
             this.$store.getters.getQuizById(this.$route.query.id).id,
           ],
-          score: meData.score + this.$store.getters.getQuizById(this.$route.query.id).point
+          score:
+            meData.score +
+            this.$store.getters.getQuizById(this.$route.query.id).point,
         })
         this.$router.push('/')
       }
