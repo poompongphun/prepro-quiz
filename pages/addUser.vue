@@ -21,7 +21,6 @@ export default {
         this.username + '@it.kmitl.ac.th',
         this.password
       )
-      console.log(user)
       await this.$fire.firestore.collection('users').doc(user.user.uid).set({
         name: this.username,
         correct_aws: [],

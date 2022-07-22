@@ -9,7 +9,6 @@
       @yes="choiceClick(choice)"
       @no="dialog = false"
     />
-    {{ $store.state.user.uid }}
   </div>
 </template>
 
@@ -34,12 +33,12 @@ export default {
           submited_user: [
             ...this.$store.getters.getQuizById(this.$route.query.id)
               .submited_user,
-            this.$store.state.user.uid,
+            this.$store.state.user.id,
           ],
         })
       const me = this.$fire.firestore
         .collection('users')
-        .doc(this.$store.state.user.uid)
+        .doc(this.$store.state.user.id)
       const meGet = await me.get()
       const meData = await meGet.data()
       console.log('medata', meGet)
@@ -62,7 +61,7 @@ export default {
           ],
           score:
             meData.score +
-            this.$store.getters.getQuizById(this.$route.query.id).point,
+            this.$store.getters.getQuizById(this.$route.query.id).del_point,
         })
         this.$router.push('/')
       }
