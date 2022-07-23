@@ -1,6 +1,6 @@
 <template>
   <div v-if="$store.state.user">
-    <NavBar :title="title"> </NavBar>
+    <NavBar :title="$store.state.user.name"> </NavBar>
     <div class="my-24 flex flex-col justify-center items-center">
       <h1 class="text-xl">Score</h1>
       <h1 class="text-8xl">{{ $store.state.user.score }}</h1>
