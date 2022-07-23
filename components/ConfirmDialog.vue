@@ -8,7 +8,7 @@
   >
     <v-card class="rounded-xl text-center">
       <h2 class="pt-3 pb-2 my-3">{{ title }}</h2>
-      <h3 class="mb-3" v-show="!!message">{{ message }}</h3>
+      <h3 class="mb-3 success--text" v-show="!!message">"{{ message }}"</h3>
       <v-card-actions>
         <v-row no-gutters>
           <v-col cols="6" class="pa-1">

@@ -1,5 +1,5 @@
 <template>
-  <div class="px-5">
+  <div v-if="getQuizById($route.query.id)" class="px-5">
     <div class="text-center my-10">
       <GlitchText text="QUIZ" size="30px" />
     </div>
@@ -27,18 +27,14 @@
           transform: translateY(-16px);
         "
       >
-        12
+        {{ getQuizById($route.query.id).no }}
       </v-chip>
       <v-expand-transition>
-        <div v-show="show" class="pa-4">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda
-          soluta recusandae, esse a unde velit eveniet veritatis harum cum
-          maiores quae earum, accusamus sequi alias eum? Dolore aspernatur
-          similique soluta. Lorem ipsum dolor sit, amet consectetur adipisicing
-          elit. Assumenda soluta recusandae, esse a unde velit eveniet veritatis
-          harum cum maiores quae earum, accusamus sequi alias eum? Dolore
-          aspernatur similique soluta.
-        </div>
+        <div
+          v-show="show"
+          class="pa-4"
+          v-html="getQuizById($route.query.id).description"
+        ></div>
       </v-expand-transition>
       <v-btn
         color="white"
@@ -56,51 +52,140 @@
       </v-btn>
     </v-card>
     <v-card
+      v-if="
+        !getQuizById($route.query.id).submited_user.includes(
+          $store.state.user.id
+        )
+      "
       class="mx-auto rounded-xl mt-10"
       elevation="0"
       style="background: none; position: relative"
       width="100%"
       max-width="500"
     >
-      <v-btn
-        v-for="(item, i) in 100"
+      <v-card
+        v-for="(item, i) in getQuizById($route.query.id).choice"
         :key="i"
-        class="my-3"
-        color="secondary"
-        rounded
-        block
-        large
-        outlined
+        class="my-3 px-5 py-3 text-center rounded-xl secondary--text"
+        color=""
+        elevation="0"
+        style="background: none; border: 1px solid #ff8f00 ;"
+        width="100%"
         @click="clickBtn(item)"
       >
-        item
-      </v-btn>
+        {{ item.value }}
+      </v-card>
+    </v-card>
+    <v-card
+      v-else
+      class="mx-auto rounded-xl mt-10 text-center"
+      elevation="0"
+      style="background: none; position: relative"
+      width="100%"
+      max-width="500"
+    >
+      <v-chip>You have already submitted this quiz.</v-chip>
     </v-card>
     <ConfirmDialog ref="ConfirmDialog" />
+    <TFDialog ref="TFDialog" :data="getQuizById($route.query.id)" />
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
 import ConfirmDialog from '../components/ConfirmDialog.vue'
 import GlitchText from '~/components/GlitchText.vue'
+import TFDialog from '~/components/TFDialog.vue'
 export default {
   name: 'QuizPage',
-  components: { GlitchText, ConfirmDialog },
+  components: { GlitchText, ConfirmDialog, TFDialog },
+  layout: 'auth',
+  async validate({ params, query, store, redirect, $fire }) {
+    if (query.id) {
+      if ($fire.auth.currentUser) {
+        const validate = $fire.firestore.collection('quiz').doc(query.id)
+        const getValidate = await validate.get()
+        const validateData = getValidate.data()
+        if (validateData) {
+          return true
+          //   if (validateData.submited_user.includes(store.state.user.id)) {
+          //     console.log('already scanned')
+          //     return false
+          //   } else {
+          //     console.log(validateData)
+          //     // validate.update({
+          //     //   scanned_user: [
+          //     //     ...validateData.scanned_user,
+          //     //     store.state.user.uid,
+          //     //   ],
+          //     // })
+          //     // console.log('first time scan')
+          //     return true
+          //   }
+        }
+        return false
+      }
+      redirect('/login?redirect=quiz?id=' + query.id)
+    }
+    return false
+  },
   data: () => ({
     show: true,
   }),
+  computed: {
+    ...mapGetters(['getQuizById']),
+  },
   methods: {
     async clickBtn(item) {
       const confirm = await this.$refs.ConfirmDialog.open(
         `Are you sure to answer`,
-        item,
+        item.value,
         {
           width: 340,
           color: 'success',
         }
       )
       if (confirm) {
-        this.$store.dispatch('delAds', item)
-        // this.$store.commit('delAds', num)
+        await this.$fire.firestore
+          .collection('quiz')
+          .doc(this.$route.query.id)
+          .update({
+            submited_user: [
+              ...this.$store.getters.getQuizById(this.$route.query.id)
+                .submited_user,
+              this.$store.state.user.id,
+            ],
+          })
+        const me = this.$fire.firestore
+          .collection('users')
+          .doc(this.$store.state.user.id)
+        const meGet = await me.get()
+        const meData = await meGet.data()
+        if (item.status) {
+          await me.update({
+            correct_aws: [
+              ...meData.correct_aws,
+              this.$store.getters.getQuizById(this.$route.query.id).id,
+            ],
+            score:
+              meData.score +
+              this.$store.getters.getQuizById(this.$route.query.id).point,
+          })
+        } else {
+          await me.update({
+            wrong_aws: [
+              ...meData.wrong_aws,
+              this.$store.getters.getQuizById(this.$route.query.id).id,
+            ],
+            score:
+              meData.score +
+              this.$store.getters.getQuizById(this.$route.query.id).del_point,
+          })
+        }
+        this.$refs.TFDialog.open(item.status)
+        setTimeout(() => {
+          this.$refs.TFDialog.close()
+          this.$router.push('/')
+        }, 5000)
       }
     },
   },

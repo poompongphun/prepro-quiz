@@ -27,7 +27,7 @@
           small
           depressed
         >
-          {{ index + 1 }}
+          {{ item ? item.no : '' }}
         </v-btn>
         <div v-if="data.length === 0"><v-chip outlined>Nothing</v-chip></div>
       </div>
@@ -57,6 +57,13 @@ export default {
   data: () => ({
     expand: false,
   }),
+  watch: {
+    data(val) {
+      if (val.length > 0) {
+        this.expand = true
+      }
+    },
+  },
   mounted() {
     if (this.data.length > 0) {
       this.expand = true
