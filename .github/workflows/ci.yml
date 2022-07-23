@@ -42,3 +42,20 @@ jobs:
 
       - name: Run linter 👀
         run: npm run lint
+
+      - name: Build
+        run: npm run generate
+        env:
+          API_KEY: ${{ secrets.API_KEY }}
+          AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
+          PROJECT_ID: ${{ secrets.PROJECT_ID }}
+          STORAGE_BUCKET: ${{ secrets.STORAGE_BUCKET }}
+          MESSAGEING_SENDER_ID: ${{ secrets.MESSAGEING_SENDER_ID }}
+          APP_ID: ${{ secrets.APP_ID }}
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_dir: ./dist
+          publish_branch: gh-pages-deploy
