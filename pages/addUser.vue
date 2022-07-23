@@ -27,6 +27,7 @@ export default {
         wrong_aws: [],
         score: 0,
         is_login: false,
+        password: this.password,
       })
 
       this.username = ''

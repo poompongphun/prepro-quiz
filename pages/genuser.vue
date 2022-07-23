@@ -2,6 +2,7 @@
   <div>
     <div v-for="(user, i) in $store.state.users" :key="i" class="my-4">
       <div>User: {{ user.name }}</div>
+      <div>Password: {{ user.password }}</div>
       <div>Score: {{ user.score }}</div>
       <div>
         Is Login:
