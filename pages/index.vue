@@ -52,8 +52,8 @@ import { mapGetters } from 'vuex'
 import ExpandAnswer from '~/components/ExpandAnswer.vue'
 export default {
   name: 'IndexPage',
-  layout: 'auth',
   components: { ExpandAnswer },
+  layout: 'auth',
   validate({ params, query, store, redirect, $fire }) {
     if (!$fire.auth.currentUser) {
       redirect('/login')

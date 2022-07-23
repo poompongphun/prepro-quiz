@@ -45,9 +45,7 @@
           {{ data.del_point }} Score
         </v-chip>
       </div>
-      <div class="mt-5">
-        {{ time }} seconds before redirect
-      </div>
+      <div class="mt-5">{{ time }} seconds before redirect</div>
     </v-card>
   </v-dialog>
 </template>

@@ -69,7 +69,7 @@
         class="my-3 px-5 py-3 text-center rounded-xl secondary--text"
         color=""
         elevation="0"
-        style="background: none; border: 1px solid #ff8f00 ;"
+        style="background: none; border: 1px solid #ff8f00"
         width="100%"
         @click="clickBtn(item)"
       >
