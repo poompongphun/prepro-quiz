@@ -26,6 +26,7 @@
           fab
           small
           depressed
+          :to="canlink ? `/quiz?id=${item.id}` : ''"
         >
           {{ item ? item.no : '' }}
         </v-btn>
@@ -52,6 +53,11 @@ export default {
       type: String,
       required: false,
       default: 'grey',
+    },
+    canlink: {
+      type: Boolean,
+      required: false,
+      default: false,
     },
   },
   data: () => ({

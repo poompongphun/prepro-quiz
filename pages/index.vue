@@ -31,6 +31,7 @@
           })
         "
         color="success"
+        :canlink="true"
       />
       <ExpandAnswer
         title="Incorrect answers"
@@ -41,6 +42,7 @@
           })
         "
         color="error"
+        :canlink="true"
       />
       <ExpandAnswer title="Answers left" :data="$store.getters.awsLeft" />
     </v-card>
