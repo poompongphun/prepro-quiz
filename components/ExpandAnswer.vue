@@ -1,7 +1,7 @@
 <template>
   <div class="mb-4">
     <v-card
-      class="d-flex align-center rounded-xl py-1 my-3 px-3"
+      class="d-flex align-center rounded-xl py-1 my-3 px-3 overflow-hidden"
       style="font-size: 20px; background: rgba(255, 255, 255, 0.2)"
       elevation="0"
       @click="expand = !expand"
