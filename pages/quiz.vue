@@ -18,28 +18,38 @@
       min-height="25"
     >
       <v-chip
-        class="font-weight-bold primary--text"
+        class="font-weight-bold primary--text elevation-1"
         color="white"
         light
         style="
           position: absolute;
           left: calc(50% - 20px);
           transform: translateY(-16px);
+          z-index: 1;
         "
       >
         {{ getQuizById($route.query.id).no }}
       </v-chip>
-      <v-expand-transition>
-        <div
-          v-show="show"
-          class="pa-4"
-          v-html="getQuizById($route.query.id).description"
-        ></div>
-      </v-expand-transition>
+      <v-card
+        class="rounded-xl overflow-hidden"
+        elevation="0"
+        width="100%"
+        height="100%"
+        style="background: none"
+      >
+        <v-expand-transition>
+          <div
+            v-show="show"
+            class="pa-4 quiz"
+            v-html="getQuizById($route.query.id).description"
+          ></div>
+        </v-expand-transition>
+      </v-card>
       <v-btn
         color="white"
         light
         depressed
+        class="elevation-1"
         fab
         absolute
         x-small
@@ -210,5 +220,22 @@ export default {
   background: rgba(255, 255, 255, 1);
   padding: 10px;
   border-radius: 50%;
+}
+.quiz {
+  max-height: 50vh;
+  overflow: auto;
+}
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0);
 }
 </style>
