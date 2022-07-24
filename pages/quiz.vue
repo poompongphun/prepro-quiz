@@ -7,7 +7,7 @@
       class="mx-auto rounded-xl"
       elevation="0"
       style="
-        background-color: rgba(255, 255, 255, 0.5);
+        background-color: none;
         position: sticky;
         top: 20px;
         z-index: 1;
@@ -17,6 +17,32 @@
       max-width="500"
       min-height="25"
     >
+      <v-card
+        class="rounded-xl"
+        width="100%"
+        height="100%"
+        style="
+          background-color: #fe721080;
+          position: absolute;
+          transform: translateX(-3px) translateY(3px);
+        "
+      ></v-card>
+      <v-card
+        class="rounded-xl"
+        width="100%"
+        height="100%"
+        style="
+          background-color: #50accb80;
+          position: absolute;
+          transform: translateX(3px) translateY(-3px);
+        "
+      ></v-card>
+      <v-card
+        class="rounded-xl"
+        width="100%"
+        height="100%"
+        style="background-color: #818b8e; position: absolute"
+      ></v-card>
       <v-chip
         class="font-weight-bold primary--text elevation-1"
         color="white"
