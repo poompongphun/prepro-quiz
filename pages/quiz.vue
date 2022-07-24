@@ -12,6 +12,7 @@
         top: 20px;
         z-index: 1;
         backdrop-filter: blur(5px);
+        animation: shake 0.5s;
       "
       width="100%"
       max-width="500"
@@ -102,7 +103,7 @@
       <v-card
         v-for="(item, i) in getQuizById($route.query.id).choice"
         :key="i"
-        class="my-3 px-5 py-3 text-center rounded-xl secondary--text"
+        class="my-3 px-5 py-3 text-center rounded-xl secondary--text cusbtn overflow-hidden"
         color=""
         elevation="0"
         style="background: none; border: 1px solid #ff8f00"
@@ -263,5 +264,30 @@ export default {
 
 ::-webkit-scrollbar-track {
   background: rgba(0, 0, 0, 0);
+}
+.cusbtn:hover {
+  animation: shake 0.5s;
+}
+@keyframes shake {
+  10%,
+  90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+
+  20%,
+  80% {
+    transform: translate3d(2px, 0, 0);
+  }
+
+  30%,
+  50%,
+  70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%,
+  60% {
+    transform: translate3d(4px, 0, 0);
+  }
 }
 </style>
