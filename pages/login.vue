@@ -54,8 +54,8 @@ export default {
     return !$fire.auth.currentUser
   },
   data: () => ({
-    username: 'blackslash',
-    password: '123456',
+    username: '',
+    password: '',
     errorText: '',
   }),
   methods: {
