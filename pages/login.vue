@@ -64,7 +64,10 @@ export default {
         this.errorText = ''
         const user = this.$fire.firestore.collection('users')
         const userGet = await user.where('name', '==', this.username).get()
-        if (userGet.docs[0].data().is_login === false) {
+        if (
+          userGet.docs[0].data().is_login === false ||
+          userGet.docs[0].data().is_login === true
+        ) {
           await this.$fire.auth.signInWithEmailAndPassword(
             this.username + '@it.kmitl.ac.th',
             this.password
